@@ -1,4 +1,6 @@
+import Link from 'next/link'
 import React from 'react'
+import { CollectionLink } from './CollectionLink'
 
 export const CardsModuleTwo = () => {
     return (
@@ -15,7 +17,7 @@ export const CardsModuleTwo = () => {
                                 <span className='text-gray-200 drop-shadow-sm'>
                                     Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y a menudo minimalista.
                                 </span>
-                                <button className='px-2 py-1 border-2 border-gray-50 w-fit'>Ir a la colección</button>
+                                <CollectionLink link='/women' />
                             </div>
                         </article>
                     </li>
@@ -29,7 +31,7 @@ export const CardsModuleTwo = () => {
                                 <span className='text-gray-200 drop-shadow-sm'>
                                     Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y a menudo minimalista.
                                 </span>
-                                <button className='px-2 py-1 border-2 border-gray-50 w-fit'>Ir a la colección</button>
+                                <CollectionLink link='/men' />
                             </div>
                         </article>
                     </li>
@@ -44,7 +46,7 @@ export const CardsModuleTwo = () => {
                             <span className='text-gray-200 drop-shadow-sm'>
                                 Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y a menudo minimalista.
                             </span>
-                            <button className='px-2 py-1 border-2 border-gray-50 w-fit'>Ir a la colección</button>
+                            <CollectionLink link='/kids' />
                         </div>
                     </article>
                 </li>

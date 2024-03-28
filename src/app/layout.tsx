@@ -1,7 +1,8 @@
-import { Inter, Fira_Sans_Condensed } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
-import "./globals.css";
 import { Slick } from "@/components/Slick";
+import { Footer } from "@/components/Footer";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Slick />
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

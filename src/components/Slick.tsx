@@ -17,7 +17,7 @@ export function Slick() {
                 loop={true}
                 init={false}
                 modules={[Autoplay]}
-                className="mySwiper select-none bg-black text-white"
+                className="mySwiper select-none bg-black text-white cursor-pointer"
             >
                 <SwiperSlide style={{ fontSize: '15px', padding: '7px 0px' }}>
                     Promociones de verano
