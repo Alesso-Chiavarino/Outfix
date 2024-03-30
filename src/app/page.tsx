@@ -6,6 +6,7 @@ import { CardsModuleTwo } from "@/components/CardsModuleTwo";
 import { Newsletter } from "@/components/Newsletter";
 
 export default function Home() {
+
   return (
     <main className="flex min-h-screen flex-col items-center gap-20">
       <Banner />

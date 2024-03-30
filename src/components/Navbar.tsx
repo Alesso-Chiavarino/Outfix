@@ -1,8 +1,21 @@
+'use client'
+
 import { IoSearchOutline, IoPersonOutline, IoCartOutline } from "react-icons/io5";
 import { Brand } from './Brand';
 import { TopicsContainer } from "./TopicsContainer";
+import { useStore } from "@/store/store";
+import Link from "next/link";
+import Cookies from "js-cookie";
+import { shallow } from "zustand/shallow";
 
 export const Navbar = () => {
+
+    const { isLogged, setIsLogged } = useStore((state) => (
+        {
+            isLogged: state.isLogged,
+            setIsLogged: state.setIsLogged
+        }
+    ), shallow)
 
     return (
         <nav className='w-full flex items-center justify-between p-4 sticky z-50 top-0 bg-white shadow-lg'>
@@ -17,7 +30,12 @@ export const Navbar = () => {
                     <span>Buscar</span>
                 </button>
                 <div className="cursor-pointer">
-                    <IoPersonOutline />
+                    {isLogged ? <button onClick={() => {
+                        Cookies.remove('_auth')
+                        setIsLogged(false)
+                        window.location.reload()
+                    }}>Cerrar Sesion</button> : <Link href={'/login'}>Inicia Sesion</Link>}
+                    {/* <IoPersonOutline /> */}
                 </div>
                 <div className="cursor-pointer">
                     <IoCartOutline />
