@@ -11,6 +11,7 @@ import axios from "axios";
 import { AuthUtils } from "@/utils/auth.utils";
 import { usePathname } from "next/navigation";
 import { Search } from "./Search";
+import { UserToken } from "@/models/IUser";
 
 export const Navbar = () => {
 
@@ -33,7 +34,7 @@ export const Navbar = () => {
             const token = AuthUtils.getToken()
 
             if (token) {
-                const decodedToken = AuthUtils.decodeToken(token)
+                const decodedToken: UserToken = AuthUtils.decodeToken(token)
                 const userId = decodedToken.nameid
                 setIsLogged(true)
 

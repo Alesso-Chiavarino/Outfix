@@ -1,12 +1,12 @@
 'use client'
 
-import { UserLogin } from '@/models/IUser'
+import { UserLogin, UserToken } from '@/models/IUser'
 import { useStore } from '@/store/store'
 import axios from 'axios'
 import { useState } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
-import { jwtDecode } from 'jwt-decode'
+import { AuthUtils } from '@/utils/auth.utils'
 
 export const useLogin = () => {
 
@@ -46,10 +46,8 @@ export const useLogin = () => {
                 Cookies.set('_auth', token.data.token)
                 setIsLogged(true)
 
-                const decodedToken: any = jwtDecode(token.data.token)
+                const decodedToken: UserToken = AuthUtils.decodeToken(token.data.token)
                 const userId = decodedToken.nameid
-
-                // Update user state
 
                 const user = await axios.get(`https://outfixapi.azurewebsites.net/api/users/${userId}`)
 

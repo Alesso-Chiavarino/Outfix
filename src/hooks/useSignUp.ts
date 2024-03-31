@@ -49,7 +49,6 @@ export const useSignUp = () => {
                 isError: true,
                 message: err.response.data.message[0]
             })
-            console.log("err", err)
         }
         finally {
             setIsLoading(false)

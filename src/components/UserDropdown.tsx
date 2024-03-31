@@ -3,7 +3,7 @@
 import React from 'react'
 import { IoPersonOutline } from 'react-icons/io5'
 import Cookies from 'js-cookie'
-import { User } from '@/models/IUser'
+import { User, UserRole } from '@/models/IUser'
 import Link from 'next/link'
 
 interface UserDropdownProps {
@@ -35,9 +35,12 @@ export const UserDropdown = ({ setIsLogged, user, isLogged }: UserDropdownProps)
                                 <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{user.email}</span>
                             </div>
                             <ul className="py-2" aria-labelledby="user-menu-button">
-                                <li>
-                                    <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mis compras</a>
-                                </li>
+                                {user.role === UserRole.admin ? (
+                                    <li>
+                                        <Link href="/admin" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Admin Manager</Link>
+                                    </li>) : (<li>
+                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mis compras</a>
+                                    </li>)}
                                 <li>
                                     <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Configuración</a>
                                 </li>

@@ -9,11 +9,24 @@ export interface UserRegister {
     Name: string;
 }
 
+export enum UserRole {
+    admin = 'admin',
+    customer = 'customer',
+    seller = 'seller',
+}
+
 export interface User {
     email: string;
     name: string;
     password: string;
-    // TODO add role
-    // Role: string;
+    role: keyof typeof UserRole;
     id: string;
+}
+
+export interface UserToken {
+    nameid: string;
+    email: string;
+    role: string;
+    exp: number;
+    iat: number;
 }
