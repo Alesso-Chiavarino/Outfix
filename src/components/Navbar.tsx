@@ -1,6 +1,6 @@
 'use client'
 
-import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { Brand } from './Brand';
 import { TopicsContainer } from "./TopicsContainer";
 import { useStore } from "@/store/store";
@@ -9,6 +9,8 @@ import { UserDropdown } from "./UserDropdown";
 import { useEffect } from "react";
 import axios from "axios";
 import { AuthUtils } from "@/utils/auth.utils";
+import { usePathname } from "next/navigation";
+import { Search } from "./Search";
 
 export const Navbar = () => {
 
@@ -21,6 +23,8 @@ export const Navbar = () => {
         }
 
     }, shallow)
+
+    const pathname = usePathname()
 
     useEffect(() => {
 
@@ -48,20 +52,22 @@ export const Navbar = () => {
 
             <Brand />
 
-            <TopicsContainer />
+            {pathname === '/login' || pathname === '/signup' ? null : (
+                <>
+                    {pathname !== '/admin' && <TopicsContainer />}
 
-            <div className='flex items-center gap-4'>
-                <button className='flex items-center gap-1 border-gray-200 px-2 py-1 hover:border-gray-400 transition-all rounded-md border-[1px]'>
-                    <IoSearchOutline />
-                    <span>Buscar</span>
-                </button>
+                    <div className='flex items-center gap-4'>
 
-                <UserDropdown setIsLogged={setIsLogged} user={user} isLogged={isLogged} />
+                        {pathname !== '/admin' && <Search />}
 
-                <div className="cursor-pointer">
-                    <IoCartOutline />
-                </div>
-            </div>
+                        <UserDropdown setIsLogged={setIsLogged} user={user} isLogged={isLogged} />
+
+                        {pathname !== '/admin' && <div className="cursor-pointer">
+                            <IoCartOutline />
+                        </div>}
+                    </div>
+                </>
+            )}
 
         </nav>
     )

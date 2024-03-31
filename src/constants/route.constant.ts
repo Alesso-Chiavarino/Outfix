@@ -1,0 +1,1 @@
+export const routesWithoutSlick = ['/login', '/signup', '/admin']
