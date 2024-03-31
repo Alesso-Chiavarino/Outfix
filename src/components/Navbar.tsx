@@ -1,21 +1,47 @@
 'use client'
 
-import { IoSearchOutline, IoPersonOutline, IoCartOutline } from "react-icons/io5";
+import { IoSearchOutline, IoCartOutline } from "react-icons/io5";
 import { Brand } from './Brand';
 import { TopicsContainer } from "./TopicsContainer";
 import { useStore } from "@/store/store";
-import Link from "next/link";
-import Cookies from "js-cookie";
 import { shallow } from "zustand/shallow";
+import { UserDropdown } from "./UserDropdown";
+import { useEffect } from "react";
+import axios from "axios";
+import { AuthUtils } from "@/utils/auth.utils";
 
 export const Navbar = () => {
 
-    const { isLogged, setIsLogged } = useStore((state) => (
-        {
+    const { isLogged, setIsLogged, user, setUser } = useStore(state => {
+        return {
             isLogged: state.isLogged,
-            setIsLogged: state.setIsLogged
+            setIsLogged: state.setIsLogged,
+            user: state.user,
+            setUser: state.setUser
         }
-    ), shallow)
+
+    }, shallow)
+
+    useEffect(() => {
+
+        const loadUser = async () => {
+
+            const token = AuthUtils.getToken()
+
+            if (token) {
+                const decodedToken = AuthUtils.decodeToken(token)
+                const userId = decodedToken.nameid
+                setIsLogged(true)
+
+                const user = await axios.get(`https://outfixapi.azurewebsites.net/api/users/${userId}`)
+
+                setUser(user.data)
+            }
+        }
+        loadUser()
+
+
+    }, [isLogged])
 
     return (
         <nav className='w-full flex items-center justify-between p-4 sticky z-50 top-0 bg-white shadow-lg'>
@@ -29,14 +55,9 @@ export const Navbar = () => {
                     <IoSearchOutline />
                     <span>Buscar</span>
                 </button>
-                <div className="cursor-pointer">
-                    {isLogged ? <button onClick={() => {
-                        Cookies.remove('_auth')
-                        setIsLogged(false)
-                        window.location.reload()
-                    }}>Cerrar Sesion</button> : <Link href={'/login'}>Inicia Sesion</Link>}
-                    {/* <IoPersonOutline /> */}
-                </div>
+
+                <UserDropdown setIsLogged={setIsLogged} user={user} isLogged={isLogged} />
+
                 <div className="cursor-pointer">
                     <IoCartOutline />
                 </div>

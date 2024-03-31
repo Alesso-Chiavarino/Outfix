@@ -2,10 +2,10 @@ import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Slick } from "@/components/Slick";
 import { Footer } from "@/components/Footer";
+import { ModulesProvider } from "@/providers/ModulesProvider";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 
 export default function RootLayout({
@@ -13,17 +13,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
-        <title>test</title>
+        <title>Outfix</title>
       </head>
 
       <body className={inter.className}>
-        <Slick />
-        <Navbar />
-        {children}
-        <Footer />
+        <ModulesProvider>
+          <Slick />
+          <Navbar />
+          {children}
+          <Footer />
+        </ModulesProvider>
       </body>
     </html>
   );

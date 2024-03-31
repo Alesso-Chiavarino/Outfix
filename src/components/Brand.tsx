@@ -9,7 +9,7 @@ const firaSansCondensed = Fira_Sans_Condensed({
 export const Brand = () => {
     return (
         <Link href="/">
-            <h1 className={`${firaSansCondensed.className} text-3xl tracking-wide`}>Outfix</h1>
+            <h1 className={`${firaSansCondensed.className} text-3xl tracking-wide px-8`}>Outfix</h1>
         </Link>
     )
 }
