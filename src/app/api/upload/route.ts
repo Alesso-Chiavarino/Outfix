@@ -1,49 +1,63 @@
-import { CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET, CLOUDINARY_CLOUD_NAME } from "@/config/cloudinary.config"
 import { ProductsService } from "@/services/products.service"
-import { v2 } from "cloudinary"
+import { CloudinaryUtils } from "@/utils/cloudinary.utils"
 import { writeFile, rm } from "fs/promises"
 import { NextResponse } from "next/server"
 import path from "path"
 
-v2.config({
-    cloud_name: CLOUDINARY_CLOUD_NAME,
-    api_key: CLOUDINARY_API_KEY,
-    api_secret: CLOUDINARY_API_SECRET
-});
 
 export async function POST(request: any) {
-    const data = await request.formData()
+    try {
+        const data = await request.formData()
+        const rawFormData = Object.fromEntries(data)
 
-    const rawFormData = {
-        Category: data.get('Category'),
-        Title: data.get('Title'),
-        Description: data.get('Description'),
-        Image: data.get('Image'),
-        Stock: Number(data.get('Stock')),
-        Price: Number(data.get('Price'))
+        const productFiles: File[] = []
+        Object.keys(rawFormData).map(key => {
+            if (typeof rawFormData[key] === 'object' && rawFormData[key].type) {
+                productFiles.push(rawFormData[key])
+            }
+        })
+
+        if (productFiles.length === 0) {
+            return NextResponse.json('No files found', { status: 400 })
+        }
+
+        const cloudinaryUtils = new CloudinaryUtils();
+
+        const productImagesPromises = productFiles.map(async file => {
+            const bytes = await file.arrayBuffer()
+            const buffer = Buffer.from(bytes)
+
+            const filePath = path.join(process.cwd(), 'public', file.name)
+            await writeFile(filePath, buffer)
+
+            const response = await cloudinaryUtils.uploadImage(filePath)
+
+            await rm(filePath)
+
+            return response.url
+        })
+
+        const productImages = await Promise.all(productImagesPromises)
+
+        const product = {
+            Category: rawFormData.Category,
+            Title: rawFormData.Title,
+            Description: rawFormData.Description,
+            Stock: Number(rawFormData.Stock),
+            Price: Number(rawFormData.Price),
+            Images: productImages
+        }
+
+        await ProductsService.createProduct(product)
+
+        return NextResponse.json({
+            message: 'Product created successfully',
+            product,
+            status: 201
+        })
+    }
+    catch (error: any) {
+        return NextResponse.json('An error occurred', { status: 500, statusText: error.message })
     }
 
-    if (!rawFormData.Image) {
-        return NextResponse.json('No files found', { status: 400 })
-    }
-
-    const bytes = await rawFormData.Image.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-
-    const filePath = path.join(process.cwd(), 'public', rawFormData.Image.name)
-    await writeFile(filePath, buffer)
-
-    const response = await v2.uploader.upload(filePath)
-
-    const product = {
-        ...rawFormData,
-        Image: response.url
-    }
-
-    const createdProduct = await ProductsService.createProduct(product)
-
-    return NextResponse.json({
-        message: 'Image uploaded',
-        createdProduct
-    })
 }

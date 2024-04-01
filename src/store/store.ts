@@ -3,7 +3,7 @@
 import { create } from 'zustand';
 import Cookies from 'js-cookie';
 import { User } from '@/models/IUser';
-import { CreateProduct, IEditProduct } from '@/models/IProduct';
+import { IEditProduct } from '@/models/IProduct';
 
 interface Error {
     isError: boolean
@@ -42,10 +42,10 @@ export const useStore = create<State>((set) => ({
         Title: '',
         Category: '',
         Description: '',
-        Image: '',
+        UploadImages: [],
         Stock: 0,
         Price: 0,
-        Files: []
+        Images: []
     },
     setIsLogged: (isLogged: boolean) => set({ isLogged }),
     setError: (error: Error) => set({ error }),

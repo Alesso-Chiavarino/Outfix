@@ -4,6 +4,7 @@ import { Slick } from "@/components/Slick";
 import { Footer } from "@/components/Footer";
 import { ModulesProvider } from "@/providers/ModulesProvider";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
           <Slick />
           <Navbar />
           {children}
+          <Toaster />
           <Footer />
         </ModulesProvider>
       </body>

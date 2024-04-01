@@ -29,6 +29,8 @@ export const Navbar = () => {
 
     useEffect(() => {
 
+        if (isLogged) return
+
         const loadUser = async () => {
 
             const token = AuthUtils.getToken()
