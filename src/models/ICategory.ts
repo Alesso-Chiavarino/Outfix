@@ -5,3 +5,5 @@ export enum CategoryTypes {
     Shoes = 'Zapatos',
     Accessories = 'Accesorios'
 }
+
+export const Categories = Object.values(CategoryTypes)

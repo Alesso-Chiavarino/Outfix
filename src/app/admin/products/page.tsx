@@ -1,6 +1,7 @@
 'use client'
 
 import { FileUploader } from '@/components/FileUploader'
+import { Categories } from '@/models/ICategory'
 import { useStore } from '@/store/store'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
@@ -91,11 +92,9 @@ export default function ProductsPage() {
                             <label className='text-sm' htmlFor="Category">Categoria</label>
                             <select name="Category" id="Category" onChange={onChange}>
                                 <option value="">Selecciona una categoria</option>
-                                <option value="Tshirts">Remeras</option>
-                                <option value="Jackets">Camperas</option>
-                                <option value="Pants">Pantalones</option>
-                                <option value="Shoes">Zapatos </option>
-                                <option value="Accessories">Accesorios</option>
+                                {Categories.map((category, index) => {
+                                    return <option key={index} value={category}>{category}</option>
+                                })}
                             </select>
                         </div>
 

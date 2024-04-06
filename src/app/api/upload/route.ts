@@ -21,8 +21,6 @@ export async function POST(request: any) {
             return NextResponse.json('No files found', { status: 400 })
         }
 
-        const cloudinaryUtils = new CloudinaryUtils();
-
         const productImagesPromises = productFiles.map(async file => {
             const bytes = await file.arrayBuffer()
             const buffer = Buffer.from(bytes)
@@ -30,7 +28,7 @@ export async function POST(request: any) {
             const filePath = path.join(process.cwd(), 'public', file.name)
             await writeFile(filePath, buffer)
 
-            const response = await cloudinaryUtils.uploadImage(filePath)
+            const response = await CloudinaryUtils.uploadImage(filePath)
 
             await rm(filePath)
 
@@ -53,6 +51,7 @@ export async function POST(request: any) {
         return NextResponse.json({
             message: 'Product created successfully',
             product,
+            rawFormData,
             status: 201
         })
     }

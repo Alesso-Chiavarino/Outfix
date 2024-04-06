@@ -1,24 +1,44 @@
 import axios from "axios";
-import { cookies } from "next/headers";
-// axios.create({
-//     baseURL: 'https://outfixapi.azurewebsites.net',
-//     headers: {
-//         'Content-Type': 'application/json'
-//     },
 
-// })
+export class OutfixApi {
 
-export const axiosInstance = axios.create();
+    public axiosInstance;
+    private _isServerSide: boolean;
 
-axiosInstance.interceptors.request.use(
-    config => {
-        const token = cookies().get('_auth');
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token.value}`;
-        }
-        return config;
-    },
-    error => {
-        return Promise.reject(error);
+    constructor(_isServerSide: boolean) {
+
+        this._isServerSide = _isServerSide;
+
+        this.axiosInstance = axios.create();
+
+        this.axiosInstance.interceptors.request.use(
+            config => {
+
+                let token: any;
+
+                if (this._isServerSide) {
+                    const { cookies } = require('next/headers');
+                    token = cookies().get('_auth').value;
+                } else {
+                    const Cookies = require("js-cookie");
+                    token = Cookies.get('_auth');
+                }
+                if (token) {
+                    config.headers['Authorization'] = `Bearer ${token}`;
+                }
+                return config;
+            },
+            error => {
+                return Promise.reject(error);
+            }
+        )
     }
-)
+
+    public Get(url: string) {
+        return this.axiosInstance.get(url);
+    }
+
+    public Post(url: string, payload: any) {
+        return this.axiosInstance.post(url, payload);
+    }
+}

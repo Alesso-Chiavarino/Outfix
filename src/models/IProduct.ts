@@ -12,3 +12,13 @@ export interface CreateProduct {
 export interface IEditProduct extends CreateProduct {
     UploadImages: File[];
 }
+
+export interface Product {
+    id: string;
+    category: keyof typeof CategoryTypes;
+    title: string;
+    description: string;
+    images: string[];
+    stock: number;
+    price: number;
+}

@@ -2,11 +2,31 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
+import { useEffect } from 'react';
+import { ProductsService } from '@/services/products.service';
+import { useStore } from '@/store/store';
+import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 export const CardTrendsModule = () => {
+
+  const { setProducts, products } = useStore(state => {
+    return {
+      setProducts: state.setProducts,
+      products: state.products
+    }
+  })
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      const products = await ProductsService.getProducts()
+      setProducts(products)
+    }
+    loadProducts()
+  }, [])
+
   return (
     <section className="container">
 
@@ -14,8 +34,9 @@ export const CardTrendsModule = () => {
 
       <Swiper
         autoplay={{
-          delay: 5000,
+          delay: 3000,
           disableOnInteraction: false,
+          pauseOnMouseEnter: true,
         }}
         navigation={true}
         loop={true}
@@ -25,758 +46,53 @@ export const CardTrendsModule = () => {
         modules={[Navigation, Autoplay]}
         className="trendsSwiper select-none"
       >
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide><SwiperSlide>
-          <div className='flex flex-col w-full items-start text-[16px]'>
-            <img
-              alt='img banner'
-              src="https://www.calvinklein.ar/arquivos/MAR_2024_MODULO_2_CARRUSEL_1.jpg?v=638451656227430000"
-              loading="lazy"
-            />
-            <span className='font-light mt-2'>Remera Nazi</span>
-            <span className='font-semibold'>$ 789</span>
-          </div>
-          <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
-        </SwiperSlide>
+        {products.map(({ images, price, title, id, category }) => {
+          return (
+            <SwiperSlide>
+              <Link href={`/${category}/${title}--${id}`} className='flex flex-col items-start text-[16px] '>
+                <div className='overflow-hidden w-full h-[300px] trendImageContainer'>
+                  {/* {images.length > 1 ? (
+                    <Swiper
+                      navigation={{
+                        enabled: true,
+                        hideOnClick: true,
+                        hiddenClass: 'hidden',
+                      }}
+                      slidesPerView={1}
+                      modules={[Navigation]}
+                      loop={true}
+                      className="mySwiperChildren select-none"
+                    >
+                      {images.map((img, index) => {
+                        return (
+                          <SwiperSlide key={index}>
+                            <img
+                              className='w-[80%] h-full object-cover'
+                              alt='img banner'
+                              src={img}
+                            // loading="lazy"
+                            />
+                          </SwiperSlide>
+                        )
+                      })}
+                    </Swiper>
+                  ) : ( */}
+                  <img
+                    className='w-[80%] h-full object-cover'
+                    alt='img banner'
+                    src={images[0]}
+                  // loading="lazy"
+                  />
+                  {/* )} */}
+                </div>
+                <span className='font-light mt-2'>{title}</span>
+                <span className='font-semibold'>$ {price}</span>
+              </Link>
+              <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
-
-
     </section>
   )
 }

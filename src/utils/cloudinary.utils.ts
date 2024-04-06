@@ -1,28 +1,31 @@
-import { v2 } from 'cloudinary'
-import { CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } from '../config/cloudinary.config'
+import { v2 as cloudinary } from 'cloudinary';
+import { CONFIG } from '../config/env.config';
 
 export class CloudinaryUtils {
+    private static isInitialized: boolean = false;
 
-    constructor() {
-        this.configCloudinary()
+    private constructor() { }
+
+    private static configCloudinary() {
+        if (!CloudinaryUtils.isInitialized) {
+            cloudinary.config({
+                cloud_name: CONFIG.CLOUDINARY_CLOUD_NAME,
+                api_key: CONFIG.CLOUDINARY_API_KEY,
+                api_secret: CONFIG.CLOUDINARY_API_SECRET
+            });
+            CloudinaryUtils.isInitialized = true;
+        }
     }
 
-    configCloudinary() {
-        v2.config({
-            cloud_name: CLOUDINARY_CLOUD_NAME,
-            api_key: CLOUDINARY_API_KEY,
-            api_secret: CLOUDINARY_API_SECRET
+    static async uploadImage(filePath: string) {
+        CloudinaryUtils.configCloudinary();
+        return await cloudinary.uploader.upload(filePath, {
+            folder: 'Outfix/products',
         });
     }
 
-    async uploadImage(filePath: string) {
-        return await v2.uploader.upload(filePath, {
-            folder: 'Outfix/products',
-        })
+    static async deleteImage(public_id: string) {
+        CloudinaryUtils.configCloudinary();
+        return await cloudinary.uploader.destroy(public_id);
     }
-
-    async deleteImage(public_id: string) {
-        return await v2.uploader.destroy(public_id)
-    }
-
 }
