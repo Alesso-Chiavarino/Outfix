@@ -48,7 +48,7 @@ export const CardTrendsModule = () => {
       >
         {products.map(({ images, price, title, id, category }) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={id}>
               <Link href={`/${category}/${title}--${id}`} className='flex flex-col items-start text-[16px] '>
                 <div className='overflow-hidden w-full h-[300px] trendImageContainer'>
                   {/* {images.length > 1 ? (
