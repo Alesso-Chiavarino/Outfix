@@ -9,6 +9,17 @@ export interface CreateProduct {
     Price: number;
 }
 
+export interface CreateProductRequest {
+    title: string;
+    category: keyof typeof CategoryTypes | '';
+    description: string;
+    images: string[];
+    stock: number;
+    price: number;
+    owner: string;
+}
+
+
 export interface IEditProduct extends CreateProduct {
     UploadImages: File[];
 }

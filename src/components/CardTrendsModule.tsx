@@ -27,12 +27,13 @@ export const CardTrendsModule = () => {
     loadProducts()
   }, [])
 
+  console.log("products", products)
   return (
     <section className="container">
 
       <h2 className="text-3xl mb-5">Tendencias</h2>
 
-      <Swiper
+      {products && products.length > 0 ? <Swiper
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
@@ -92,7 +93,8 @@ export const CardTrendsModule = () => {
             </SwiperSlide>
           )
         })}
-      </Swiper>
+      </Swiper> : <p>Cargando productos...</p>}
+
     </section>
   )
 }

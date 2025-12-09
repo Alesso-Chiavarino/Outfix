@@ -5,6 +5,7 @@ import { useStore } from '@/store/store'
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { API_URL } from '@/config/services.config'
 
 export const useSignUp = () => {
 
@@ -38,7 +39,7 @@ export const useSignUp = () => {
         setIsLoading(true)
 
         try {
-            const res = await axios.post('https://outfixapi.azurewebsites.net/api/users', user)
+            const res = await axios.post(`${API_URL}/api/users`, user)
 
             if (res.status === 201) {
                 router.push('/login')

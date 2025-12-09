@@ -39,6 +39,7 @@ export class OutfixApi {
     }
 
     public Post(url: string, payload: any) {
+        console.log("post", url, payload)
         return this.axiosInstance.post(url, payload);
     }
 }

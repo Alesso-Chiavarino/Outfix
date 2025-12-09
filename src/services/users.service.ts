@@ -1,4 +1,5 @@
 import { OutfixApi } from "@/config/axios.config";
+import { API_URL } from "@/config/services.config";
 
 export class UsersService {
     static async getUsers() {
@@ -9,7 +10,7 @@ export class UsersService {
 
         console.log("test", process.env.API_URL?.concat('/users'))
 
-        const users = (await outfixApi.Get('https://outfixapi.azurewebsites.net/api/users')).data
+        const users = (await outfixApi.Get(`${API_URL}/api/users`)).data
 
         return users;
     }

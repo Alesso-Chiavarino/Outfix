@@ -8,12 +8,13 @@ import { toast } from 'sonner'
 
 export default function ProductsPage() {
 
-    const { editProduct, setEditProduct, isLoading, setIsLoading } = useStore(state => {
+    const { editProduct, setEditProduct, isLoading, setIsLoading, user } = useStore(state => {
         return {
             editProduct: state.editProduct,
             setEditProduct: state.setEditProduct,
             isLoading: state.isLoading,
-            setIsLoading: state.setIsLoading
+            setIsLoading: state.setIsLoading,
+            user: state.user,
         }
     })
 
@@ -34,6 +35,7 @@ export default function ProductsPage() {
             formData.append('Description', editProduct.Description)
             formData.append('Stock', editProduct.Stock.toString())
             formData.append('Price', editProduct.Price.toString())
+            formData.append('Owner', user.email)
 
             for (let i = 0; i < editProduct.UploadImages.length; i++) {
                 formData.append(editProduct.UploadImages[i].name, editProduct.UploadImages[i])

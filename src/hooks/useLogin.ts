@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/navigation'
 import { AuthUtils } from '@/utils/auth.utils'
+import { API_URL } from '@/config/services.config'
 
 export const useLogin = () => {
 
@@ -40,7 +41,7 @@ export const useLogin = () => {
         setIsLoading(true)
 
         try {
-            const token = await axios.post('https://outfixapi.azurewebsites.net/api/authentication/login', userLogin)
+            const token = await axios.post(`${API_URL}/api/authentication/login`, userLogin)
 
             if (token.data) {
                 Cookies.set('_auth', token.data.token)
@@ -49,7 +50,7 @@ export const useLogin = () => {
                 const decodedToken: UserToken = AuthUtils.decodeToken(token.data.token)
                 const userId = decodedToken.nameid
 
-                const user = await axios.get(`https://outfixapi.azurewebsites.net/api/users/${userId}`)
+                const user = await axios.get(`${API_URL}/api/users/${userId}`)
 
                 setUser(user.data)
 
