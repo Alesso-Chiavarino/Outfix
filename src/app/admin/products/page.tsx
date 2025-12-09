@@ -2,21 +2,39 @@
 
 import { FileUploader } from '@/components/FileUploader'
 import { Categories } from '@/models/ICategory'
+import { ProductsService } from '@/services/products.service'
 import { useStore } from '@/store/store'
+import Link from 'next/link'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
 
 export default function ProductsPage() {
 
-    const { editProduct, setEditProduct, isLoading, setIsLoading, user } = useStore(state => {
-        return {
-            editProduct: state.editProduct,
-            setEditProduct: state.setEditProduct,
-            isLoading: state.isLoading,
-            setIsLoading: state.setIsLoading,
-            user: state.user,
+    const {
+        editProduct,
+        setEditProduct,
+        isLoading,
+        setIsLoading,
+        user,
+        products,
+        setProducts
+    } = useStore(state => ({
+        editProduct: state.editProduct,
+        setEditProduct: state.setEditProduct,
+        isLoading: state.isLoading,
+        setIsLoading: state.setIsLoading,
+        user: state.user,
+        products: state.products,
+        setProducts: state.setProducts
+    }))
+
+    useEffect(() => {
+        const loadProducts = async () => {
+            const products = await ProductsService.getProducts()
+            setProducts(products)
         }
-    })
+        loadProducts()
+    }, [])
 
     const onSubmit = async (e: any) => {
         e.preventDefault()
@@ -130,6 +148,39 @@ export default function ProductsPage() {
                     </div>
 
                 </form>
+            </section>
+
+            <section className="w-full p-10">
+                <h2 className="text-xl font-semibold mb-6">Productos existentes</h2>
+
+                {products.length === 0 ? (
+                    <p>No hay productos cargados.</p>
+                ) : (
+                    <div className="grid grid-cols-4 gap-8">
+                        {products.map(product => (
+                            <div key={product.id} className="border p-3 rounded-xl shadow-md hover:shadow-lg transition">
+
+                                <img
+                                    src={product.images[0]}
+                                    alt={product.title}
+                                    className="w-full h-48 object-cover rounded-md"
+                                />
+
+                                <h3 className="font-semibold mt-3">{product.title}</h3>
+                                <p className="text-gray-600">{product.category}</p>
+                                <p className="font-bold mt-1">$ {product.price}</p>
+
+                                <Link
+                                    href={`/${product.category}/${product.title}--${product.id}`}
+                                    className="text-blue-500 text-sm mt-2 inline-block"
+                                >
+                                    Ver producto →
+                                </Link>
+                            </div>
+                        ))}
+                    </div>
+                )}
+
             </section>
         </main>
     )

@@ -42,4 +42,12 @@ export class OutfixApi {
         console.log("post", url, payload)
         return this.axiosInstance.post(url, payload);
     }
+
+    public Put(url: string, payload: any) {
+        return this.axiosInstance.put(url, payload);
+    }
+
+    public Delete(url: string) {
+        return this.axiosInstance.delete(url);
+    }
 }

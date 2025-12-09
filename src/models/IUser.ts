@@ -23,6 +23,11 @@ export interface User {
     id: string;
 }
 
+export interface UserUpdateRequest {
+    name?: string;
+    role?: keyof typeof UserRole;
+}
+
 export interface UserToken {
     nameid: string;
     email: string;
