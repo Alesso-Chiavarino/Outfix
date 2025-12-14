@@ -12,6 +12,36 @@ export class ProductsService {
         return res.data.products
     }
 
+    static async getProductsByCategory(
+        categoryId: string,
+        limit?: number
+    ): Promise<Product[]> {
+        const outfixApi = new OutfixApi(false)
+
+        const query = new URLSearchParams()
+        query.append('category', categoryId)
+
+        if (limit) {
+            query.append('limit', limit.toString())
+        }
+
+        const res = await outfixApi.Get(
+            `${API_URL}/api/products?${query.toString()}`
+        )
+
+        return res.data.products
+    }
+
+    static async searchProducts(query: string): Promise<Product[]> {
+        const outfixApi = new OutfixApi(false)
+
+        const res = await outfixApi.Get(
+            `${API_URL}/api/products?search=${encodeURIComponent(query)}&limit=6`
+        )
+
+        return res.data.products
+    }
+
     static async getUserProducts(userEmail: string): Promise<Product[]> {
 
         const outfixApi = new OutfixApi(false)

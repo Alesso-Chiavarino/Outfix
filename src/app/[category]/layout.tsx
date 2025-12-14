@@ -1,0 +1,10 @@
+export default function CategoryLayout({ children }: { children: React.ReactNode }) {
+    return (
+        <main className="min-h-[94vh] bg-gray-50">
+            <div className='flex h-full w-full'>
+                {children}
+            </div>
+        </main>
+
+    )
+}

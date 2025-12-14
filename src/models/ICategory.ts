@@ -15,4 +15,5 @@ export interface ICategory {
     icon: string;
     active: boolean;
     parentId: string | null;
+    banner: string;
 }

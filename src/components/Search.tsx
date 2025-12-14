@@ -1,9 +1,16 @@
-import React from 'react'
+// Search.tsx
 import { IoSearchOutline } from 'react-icons/io5'
 
-export const Search = () => {
+export const Search = ({ onClick }: { onClick: () => void }) => {
     return (
-        <button className='flex items-center gap-1 border-gray-200 px-2 py-1 hover:border-gray-400 transition-all rounded-md border-[1px]'>
+        <button
+            onClick={onClick}
+            className="
+                flex items-center gap-2 
+                border px-3 py-1.5 rounded-md 
+                hover:border-gray-400 transition
+            "
+        >
             <IoSearchOutline />
             <span>Buscar</span>
         </button>

@@ -13,10 +13,11 @@ import { ColorsService } from "@/services/colors.service";
 
 export default function Home() {
 
-  const { setCategories, setColors } = useStore(state => {
+  const { setCategories, setColors, categories } = useStore(state => {
     return {
       setCategories: state.setCategories,
-      setColors: state.setColors
+      setColors: state.setColors,
+      categories: state.categories,
     }
   })
 
@@ -32,12 +33,15 @@ export default function Home() {
     loadInitialData();
   }, []);
 
+  const categoriesModuleOne = categories && categories.slice(0, 4);
+  const categoriesModuleThree = categories && categories.slice(4, 7);
+
   return (
     <main className="flex min-h-[94vh] flex-col items-center gap-20">
       <Banner />
-      <CardsModuleOne />
+      <CardsModuleOne categories={categoriesModuleOne} />
       <CardsModuleTwo />
-      <CardsModuleThree />
+      <CardsModuleThree categories={categoriesModuleThree} />
       <CardTrendsModule />
       <Newsletter />
     </main>
