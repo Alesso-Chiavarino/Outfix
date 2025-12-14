@@ -6,11 +6,34 @@ import { CardsModuleOne } from "@/components/CardsModuleOne";
 import { CardsModuleThree } from "@/components/CardsModuleThree";
 import { CardsModuleTwo } from "@/components/CardsModuleTwo";
 import { Newsletter } from "@/components/Newsletter";
+import { useEffect } from "react";
+import { useStore } from "@/store/store";
+import { CategoriesService } from "@/services/categories.service";
+import { ColorsService } from "@/services/colors.service";
 
 export default function Home() {
 
+  const { setCategories, setColors } = useStore(state => {
+    return {
+      setCategories: state.setCategories,
+      setColors: state.setColors
+    }
+  })
+
+  useEffect(() => {
+    const loadInitialData = async () => {
+      const categories = await CategoriesService.getCategories()
+      const colors = await ColorsService.getColors()
+
+      setCategories(categories)
+      setColors(colors)
+    }
+
+    loadInitialData();
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center gap-20">
+    <main className="flex min-h-[94vh] flex-col items-center gap-20">
       <Banner />
       <CardsModuleOne />
       <CardsModuleTwo />

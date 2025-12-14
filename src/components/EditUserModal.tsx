@@ -1,72 +1,74 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { User } from '@/models/IUser'
+import { useState } from "react";
+import { User } from "@/models/IUser";
 
 export default function EditUserModal({ user }: { user: User }) {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     return (
         <>
             <button
                 onClick={() => setOpen(true)}
-                className="text-blue-600 hover:underline"
+                className="font-medium text-blue-600 hover:underline"
             >
-                Editar
+                Edit user
             </button>
-
             {open && (
-                <div className="fixed inset-0 bg-black/40 flex justify-center items-center z-50">
-                    <div className="bg-white p-6 rounded-lg w-[400px] shadow-xl">
-                        
-                        <h3 className="text-xl font-semibold mb-4">Editar usuario</h3>
+                <div className="fixed top-0 left-0 right-0 z-50 w-full p-4 bg-black/40 
+                    h-screen flex justify-center items-center">
 
-                        <div className="flex flex-col gap-3">
-                            <div>
-                                <label className="text-sm text-gray-600">Nombre</label>
-                                <input
-                                    defaultValue={user.name}
-                                    className="w-full border px-3 py-2 rounded bg-gray-100"
-                                />
-                            </div>
+                    <div className="bg-white dark:bg-gray-700 rounded-lg w-full max-w-2xl shadow-lg">
 
-                            <div>
-                                <label className="text-sm text-gray-600">Email</label>
-                                <input
-                                    defaultValue={user.email}
-                                    disabled
-                                    className="w-full border px-3 py-2 rounded bg-gray-200 cursor-not-allowed"
-                                />
-                            </div>
-
-                            <div>
-                                <label className="text-sm text-gray-600">Rol</label>
-                                <select
-                                    defaultValue={user.role}
-                                    className="w-full border px-3 py-2 rounded bg-gray-100"
-                                >
-                                    <option value="USER">Usuario</option>
-                                    <option value="ADMIN">Administrador</option>
-                                </select>
-                            </div>
-
+                        <div className="flex justify-between p-4 border-b dark:border-gray-600">
+                            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                                Edit user – {user.name}
+                            </h3>
                             <button
-                                className="mt-3 bg-blue-600 text-white px-4 py-2 rounded w-full hover:bg-blue-500"
-                                disabled
-                            >
-                                Guardar cambios (no implementado)
-                            </button>
-
-                            <button
-                                className="mt-2 text-gray-600 hover:underline text-sm"
+                                className="text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 
+                                rounded-lg w-8 h-8 flex items-center justify-center"
                                 onClick={() => setOpen(false)}
                             >
-                                Cancelar
+                                ✕
                             </button>
                         </div>
+
+                        <form
+                            action={`/api/users/${user.id}`}
+                            method="POST"
+                            className="p-6 space-y-6"
+                        >
+                            <div className="grid grid-cols-6 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                    <label className="text-sm font-medium">Name</label>
+                                    <input
+                                        name="name"
+                                        defaultValue={user.name}
+                                        className="block w-full p-2.5 rounded-lg border bg-gray-50 dark:bg-gray-600 dark:text-white"
+                                    />
+                                </div>
+
+                                <div className="col-span-6 sm:col-span-3">
+                                    <label className="text-sm font-medium">Role</label>
+                                    <input
+                                        name="role"
+                                        defaultValue={user.role}
+                                        className="block w-full p-2.5 rounded-lg border bg-gray-50 dark:bg-gray-600 dark:text-white"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex justify-end p-4 border-t dark:border-gray-600">
+                                <button
+                                    type="submit"
+                                    className="px-5 py-2.5 rounded-lg bg-blue-700 text-white hover:bg-blue-800"
+                                >
+                                    Save changes
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             )}
         </>
-    )
+    );
 }

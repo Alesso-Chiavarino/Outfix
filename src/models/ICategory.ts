@@ -7,3 +7,12 @@ export enum CategoryTypes {
 }
 
 export const Categories = Object.values(CategoryTypes)
+export interface ICategory {
+    id: string;
+    title: string;
+    slug: string;
+    description: string;
+    icon: string;
+    active: boolean;
+    parentId: string | null;
+}

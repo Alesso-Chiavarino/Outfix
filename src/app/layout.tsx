@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { ModulesProvider } from "@/providers/ModulesProvider";
 import { Toaster } from "sonner";
 import Hydration from "@/providers/Hydration";
+import NextTopLoader from 'nextjs-toploader';
 import "./globals.scss";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,6 +24,7 @@ export default function RootLayout({
       </head>
 
       <body className={inter.className}>
+        <NextTopLoader color="black" />
         <Hydration />
         <ModulesProvider>
           <Slick />

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { ProductCard } from './ProductCard';
 
 export const CardTrendsModule = () => {
 
@@ -27,7 +28,6 @@ export const CardTrendsModule = () => {
     loadProducts()
   }, [])
 
-  console.log("products", products)
   return (
     <section className="container">
 
@@ -47,48 +47,10 @@ export const CardTrendsModule = () => {
         modules={[Navigation, Autoplay]}
         className="trendsSwiper select-none"
       >
-        {products.map(({ images, price, title, id, category }) => {
+        {products.map((prod) => {
           return (
-            <SwiperSlide key={id}>
-              <Link href={`/${category}/${title}--${id}`} className='flex flex-col items-start text-[16px] '>
-                <div className='overflow-hidden w-full h-[300px] trendImageContainer'>
-                  {/* {images.length > 1 ? (
-                    <Swiper
-                      navigation={{
-                        enabled: true,
-                        hideOnClick: true,
-                        hiddenClass: 'hidden',
-                      }}
-                      slidesPerView={1}
-                      modules={[Navigation]}
-                      loop={true}
-                      className="mySwiperChildren select-none"
-                    >
-                      {images.map((img, index) => {
-                        return (
-                          <SwiperSlide key={index}>
-                            <img
-                              className='w-[80%] h-full object-cover'
-                              alt='img banner'
-                              src={img}
-                            // loading="lazy"
-                            />
-                          </SwiperSlide>
-                        )
-                      })}
-                    </Swiper>
-                  ) : ( */}
-                  <img
-                    className='w-[80%] h-full object-cover'
-                    alt='img banner'
-                    src={images[0]}
-                  // loading="lazy"
-                  />
-                  {/* )} */}
-                </div>
-                <span className='font-light mt-2'>{title}</span>
-                <span className='font-semibold'>$ {price}</span>
-              </Link>
+            <SwiperSlide key={prod.id}>
+              <ProductCard product={prod} />
               <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </SwiperSlide>
           )

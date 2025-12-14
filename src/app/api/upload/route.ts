@@ -9,7 +9,9 @@ export async function POST(request: Request) {
         const data = await request.formData();
 
         const rawFormData = Object.fromEntries(data);
+        const variantsJson = rawFormData.Variants ? JSON.parse(rawFormData.Variants.toString()) : []
 
+        console.log("rawFormData", rawFormData)
         const productFiles: File[] = [];
         Object.keys(rawFormData).forEach(key => {
             const value = rawFormData[key];
@@ -49,12 +51,15 @@ export async function POST(request: Request) {
             title: rawFormData.Title.toString(),
             category: rawFormData.Category.toString() as keyof typeof import('@/models/ICategory').CategoryTypes,
             description: rawFormData.Description.toString(),
-            stock: Number(rawFormData.Stock),
             price: Number(rawFormData.Price),
             images: uploadedImages,
             owner: rawFormData.Owner.toString(),
+            target: rawFormData.Target.toString() as any,
+            variants: variantsJson,
+            draft: rawFormData.Draft === 'true' ? true : false
         };
 
+        console.log("product", product)
 
         await ProductsService.createProduct(product);
 

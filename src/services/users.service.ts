@@ -9,7 +9,6 @@ export class UsersService {
 
         const outfixApi = new OutfixApi(true)
 
-        console.log("test", process.env.API_URL?.concat('/users'))
 
         const users = (await outfixApi.Get(`${API_URL}/api/users`)).data
 

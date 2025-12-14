@@ -1,47 +1,61 @@
 import { ImagesSlider } from "@/components/ImagesSlider"
-import { ProductDetails } from "@/components/ProductDetails";
+import { ProductCard } from "@/components/ProductCard"
+import { ProductDetails } from "@/components/ProductDetails"
 import { ProductsService } from "@/services/products.service"
+import Link from "next/link"
 
 export default async function page({ params }: {
     params: {
-        category: string,
+        category: string
         productData: string
     }
 }) {
+    const productId = params.productData.split('-outfix-')[1]
 
-    const { category, productData } = params
+    const product = await ProductsService.getProductDetail(productId)
+    // console.log("DATA", product.category.id, product.id)
+    const relatedProducts = await ProductsService.getRelatedProducts(
+        product.category.id,
+        product.id,
+        8
+    )
 
-    const productId = productData.split('--')[1]
-
-    const product = await ProductsService.getProductById(productId)
+    console.log("relatedProducts", relatedProducts)
 
     return (
-        <main className="min-h-screen container flex p-10 flex-col mx-auto gap-10 items-center">
+        <main className="min-h-[94vh] container mx-auto p-10 flex flex-col gap-16">
 
-            <article className="h-full w-full flex flex-col gap-6">
-
-                <div className="flex h-fit w-full gap-10">
-                    <div className="w-[50%] h-full">
-                        <ImagesSlider images={product.images} />
-                    </div>
-
-                    <div className="w-[50%] h-full border-[1px] rounded-md border-gray-300 p-5 flex flex-col gap-5">
-                        <ProductDetails product={{
-                            title: product.title,
-                            price: product.price,
-                            stock: product.stock
-                        }} />
-                    </div>
-
+            {/* DETALLE */}
+            <section className="flex gap-10">
+                <div className="w-1/2">
+                    <ImagesSlider images={product.images} />
                 </div>
 
-                <hr />
-
-                <div>
-                    <p>{product.description}</p>
+                <div className="w-1/2 border rounded-lg p-6">
+                    <ProductDetails product={product} />
                 </div>
-            </article>
+            </section>
 
-        </main >
+            <section className="max-w-3xl">
+                <h3 className="text-xl font-semibold mb-2">Descripción</h3>
+                <p className="text-gray-700">{product.description}</p>
+            </section>
+
+            {/* RELACIONADOS */}
+            <div className="my-5 border-t border-gray-200" />
+            {relatedProducts.length > 0 && (
+                <section className="mt-20">
+                    <h3 className="text-2xl font-semibold mb-6">
+                        Productos relacionados
+                    </h3>
+
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {relatedProducts.map(p => (
+                            <ProductCard key={p.id} product={p} />
+                        ))}
+                    </div>
+                </section>
+            )}
+        </main>
     )
 }

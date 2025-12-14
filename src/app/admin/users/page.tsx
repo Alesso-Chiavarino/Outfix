@@ -6,7 +6,7 @@ import { Suspense } from "react";
 export default async function UsersPage() {
 
     return (
-        <main className='flex min-h-screen justify-center w-[80%] gap-20 overflow-hidden'>
+        <main className='flex min-h-[94vh] justify-center w-[80%] gap-20 overflow-hidden'>
             <Suspense fallback={<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
