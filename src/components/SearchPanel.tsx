@@ -5,7 +5,7 @@ import { IoSearchOutline, IoClose } from 'react-icons/io5'
 import { useSearch } from '@/hooks/useSearch'
 
 export const SearchPanel = ({ onClose }: { onClose: () => void }) => {
-    const { query, setQuery, results, loading } = useSearch()
+    const { query, setQuery, results, loading, categories } = useSearch()
 
     return (
         <>
@@ -48,29 +48,34 @@ export const SearchPanel = ({ onClose }: { onClose: () => void }) => {
                         </div>
                     )}
 
-                    {results.map(p => (
-                        <Link
-                            key={p.id}
-                            href={`/${p.category}/${p.title}-outfix-${p.id}`}
-                            onClick={onClose}
-                            className="
+                    {results.map(p => {
+
+                        const category = categories.find(cat => cat.id === p.category);
+
+                        return (
+                            <Link
+                                key={p.id}
+                                href={`/${category?.slug}/${p.title}-outfix-${p.id}`}
+                                onClick={onClose}
+                                className="
                                 flex items-center gap-4 p-4 
                                 hover:bg-gray-50 transition
                             "
-                        >
-                            <img
-                                src={p.images?.[0]}
-                                className="w-14 h-14 object-cover rounded-md"
-                            />
+                            >
+                                <img
+                                    src={p.images?.[0]}
+                                    className="w-14 h-14 object-cover rounded-md"
+                                />
 
-                            <div className="flex flex-col">
-                                <span className="font-medium">{p.title}</span>
-                                <span className="text-sm text-gray-500">
-                                    ${p.price.toLocaleString('es-AR')}
-                                </span>
-                            </div>
-                        </Link>
-                    ))}
+                                <div className="flex flex-col">
+                                    <span className="font-medium">{p.title}</span>
+                                    <span className="text-sm text-gray-500">
+                                        ${p.price.toLocaleString('es-AR')}
+                                    </span>
+                                </div>
+                            </Link>
+                        )
+                    })}
                 </div>
             </div>
         </>

@@ -34,7 +34,7 @@ export default function Home() {
   }, []);
 
   const categoriesModuleOne = categories && categories.slice(0, 4);
-  const categoriesModuleThree = categories && categories.slice(4, 7);
+  const categoriesModuleThree = categories && categories.slice(4, 8);
 
   return (
     <main className="flex min-h-[94vh] flex-col items-center gap-20">

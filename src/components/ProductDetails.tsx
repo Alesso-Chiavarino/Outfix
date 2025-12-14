@@ -3,6 +3,9 @@
 import React, { useMemo, useState } from 'react'
 import { IoIosHeartEmpty } from 'react-icons/io'
 import { IProductDetail } from '@/models/IProduct'
+import { CartService } from '@/services/carts.service'
+import { useStore } from '@/store/store'
+import { toast } from 'sonner'
 
 export const ProductDetails = ({ product }: { product: IProductDetail }) => {
     const [selectedColor, setSelectedColor] = useState<string | null>(
@@ -10,8 +13,11 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
     )
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
     const [quantity, setQuantity] = useState(1)
+    const [isAdding, setIsAdding] = useState(false)
 
-    // Variantes filtradas por color
+    const { setCart, isLogged } = useStore()
+
+    // 🔹 Talles disponibles según color
     const availableSizes = useMemo(() => {
         if (!selectedColor) return []
         return product.variants
@@ -19,7 +25,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
             .map(v => v.size)
     }, [selectedColor, product.variants])
 
-    // Variante seleccionada real
+    // 🔹 Variante real seleccionada
     const selectedVariant = useMemo(() => {
         if (!selectedColor || !selectedSize) return null
         return product.variants.find(
@@ -28,10 +34,42 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
     }, [selectedColor, selectedSize, product.variants])
 
     const stock = selectedVariant?.stock ?? 0
+
+    // 🛒 ADD TO CART
+    const handleAddToCart = async () => {
+        if (!selectedVariant || !selectedColor || !selectedSize) return
+
+        if (!isLogged) {
+            toast.error('Tenés que iniciar sesión para comprar')
+            return
+        }
+
+        const variantId = `${selectedSize}_${selectedColor}`
+
+        try {
+            setIsAdding(true)
+
+            await CartService.addItem({
+                productId: product.id,
+                variantId,
+                quantity,
+            })
+
+            const cart = await CartService.getCart()
+
+            setCart(cart)
+            toast.success('Producto agregado al carrito')
+        } catch (err) {
+            toast.error('Error al agregar al carrito')
+        } finally {
+            setIsAdding(false)
+        }
+    }
+
     return (
         <div className="flex flex-col gap-6">
 
-            {/* Título + favorito */}
+            {/* TÍTULO */}
             <div className="flex justify-between items-start gap-4">
                 <div>
                     <h1 className="text-2xl font-semibold leading-tight">
@@ -48,7 +86,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                 />
             </div>
 
-            {/* Precio */}
+            {/* PRECIO */}
             <div>
                 <span className="text-3xl font-semibold">
                     ${product.price.toLocaleString('es-AR')}
@@ -73,8 +111,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                                 setQuantity(1)
                             }}
                             className={`
-                                w-8 h-8 rounded-full border-2
-                                transition
+                                w-8 h-8 rounded-full border-2 transition
                                 ${selectedColor === color.id
                                     ? 'border-black'
                                     : 'border-gray-300'}
@@ -100,8 +137,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                                     setQuantity(1)
                                 }}
                                 className={`
-                                    px-4 py-1.5 rounded-md border text-sm
-                                    transition
+                                    px-4 py-1.5 rounded-md border text-sm transition
                                     ${selectedSize === size
                                         ? 'border-black bg-black text-white'
                                         : 'border-gray-300 hover:border-black'}
@@ -114,7 +150,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                 </div>
             )}
 
-            {/* STOCK */}
+            {/* STOCK + CANTIDAD */}
             {selectedVariant && (
                 <div className="flex flex-col gap-2">
                     {stock > 0 ? (
@@ -127,7 +163,6 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                         </span>
                     )}
 
-                    {/* Cantidad */}
                     {stock > 0 && (
                         <div className="flex items-center gap-3">
                             <span className="text-sm">Cantidad</span>
@@ -136,12 +171,9 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                                 onChange={e => setQuantity(Number(e.target.value))}
                                 className="border rounded-md px-2 py-1 text-sm"
                             >
-                                {Array.from({ length: stock }, (_, i) => i + 1)
-                                    .slice(0, 10)
+                                {Array.from({ length: Math.min(stock, 10) }, (_, i) => i + 1)
                                     .map(n => (
-                                        <option key={n} value={n}>
-                                            {n}
-                                        </option>
+                                        <option key={n} value={n}>{n}</option>
                                     ))}
                             </select>
                         </div>
@@ -151,7 +183,8 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
 
             {/* CTA */}
             <button
-                disabled={!selectedVariant || stock === 0}
+                disabled={!selectedVariant || stock === 0 || isAdding}
+                onClick={handleAddToCart}
                 className={`
                     mt-4 w-full py-3 rounded-full font-semibold transition
                     ${selectedVariant && stock > 0
@@ -159,7 +192,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                         : 'bg-gray-300 text-gray-600 cursor-not-allowed'}
                 `}
             >
-                Agregar al carrito
+                {isAdding ? 'Agregando…' : 'Agregar al carrito'}
             </button>
         </div>
     )

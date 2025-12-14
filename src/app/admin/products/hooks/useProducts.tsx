@@ -96,6 +96,43 @@ export const useProducts = (onSuccess?: () => void, editingProduct?: Product) =>
         setVariants(variants.filter((_, idx) => idx !== i))
     }
 
+    const deleteProduct = async () => {
+        if (!editingProduct) return;
+
+        toast(
+            "¿Eliminar producto?",
+            {
+                description: "Esta acción no se puede deshacer.",
+                action: {
+                    label: "Eliminar",
+                    onClick: async () => {
+                        console.log("ACAAA")
+                        toast.loading("Eliminando producto...", { id: "delete-product-toast" });
+                        setIsLoading(true);
+
+                        try {
+                            await ProductsService.deleteProduct(editingProduct.id);
+
+                            toast.success("Producto eliminado", { id: "delete-product-toast" });
+                            resetEditProduct();
+                            onSuccess && onSuccess();
+                        } catch {
+                            toast.error("Error eliminando el producto", { id: "delete-product-toast" });
+                        } finally {
+                            setIsLoading(false);
+                        }
+                    }
+                },
+                cancel: {
+                    label: "Cancelar",
+                    onClick: () => {
+                        toast.dismiss();
+                    }
+                }
+            }
+        );
+    };
+
     const onSubmit = async (e: any) => {
         e.preventDefault()
         let isSuccess = false
@@ -201,6 +238,7 @@ export const useProducts = (onSuccess?: () => void, editingProduct?: Product) =>
         onSubmit,
         onChange,
         user,
-        resetForm
+        resetForm,
+        deleteProduct
     }
 }

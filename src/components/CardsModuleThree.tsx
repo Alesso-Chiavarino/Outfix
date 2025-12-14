@@ -8,7 +8,7 @@ export const CardsModuleThree = ({ categories }: { categories: ICategory[] }) =>
             <div className="container">
                 <ul className="grid grid-cols-4 items-center gap-5">
                     {categories && categories.map(category => (
-                        <li className="relative overflow-hidden" key={category.id}>
+                        <li className="relative overflow-hidden h-full" key={category.id}>
                             <Link href={`/${category.slug}`}>
                                 <img className="h-full w-full object-cover" src={category.banner} alt={category.title} />
                             </Link>

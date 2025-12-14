@@ -3,11 +3,18 @@
 import { useEffect, useState } from 'react'
 import { ProductsService } from '@/services/products.service'
 import { Product } from '@/models/IProduct'
+import { useStore } from '@/store/store'
 
 export const useSearch = () => {
     const [query, setQuery] = useState('')
     const [results, setResults] = useState<Product[]>([])
     const [loading, setLoading] = useState(false)
+
+    const { categories } = useStore(state => {
+        return {
+            categories: state.categories,
+        }
+    })
 
     useEffect(() => {
         if (!query || query.length < 2) {
@@ -32,6 +39,7 @@ export const useSearch = () => {
         query,
         setQuery,
         results,
-        loading
+        loading,
+        categories
     }
 }

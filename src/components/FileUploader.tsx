@@ -9,7 +9,7 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 
 import { useStore } from '@/store/store'
 
-export function FileUploader() {
+export function FileUploader({ resetKey }: { resetKey: number }) {
 
     const { editProduct, setEditProduct } = useStore(state => {
         return {
@@ -47,9 +47,10 @@ export function FileUploader() {
 
     return (
         <FilePond
+            key={resetKey} 
             files={files}
             onremovefile={onRemoveFile}
-            allowMultiple={true}
+            allowMultiple
             maxFiles={3}
             acceptedFileTypes={['image/*']}
             name="Image"

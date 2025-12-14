@@ -8,10 +8,12 @@ export default async function CategoryPage({
 }: {
     params: { category: string }
 }) {
-    const slug = params.category
-
+    const slug = decodeURIComponent(params.category)
+    console.log("SLUG", slug)
     const categories = await CategoriesService.getCategories()
-    const category = categories.find(c => c.slug === slug)
+    const category = categories.find(c => c.slug.toLowerCase() === slug.toLowerCase())
+    console.log("category", category)
+    console.log("categories", categories)
 
     if (!category) {
         notFound()
@@ -44,6 +46,7 @@ export default async function CategoryPage({
                         <ProductCard
                             key={product.id}
                             product={product}
+                            category={category}
                         />
                     ))}
                 </section>

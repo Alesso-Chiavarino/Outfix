@@ -13,10 +13,11 @@ import { ProductCard } from './ProductCard';
 
 export const CardTrendsModule = () => {
 
-  const { setProducts, products } = useStore(state => {
+  const { setProducts, products, categories } = useStore(state => {
     return {
       setProducts: state.setProducts,
-      products: state.products
+      products: state.products,
+      categories: state.categories,
     }
   })
 
@@ -48,9 +49,12 @@ export const CardTrendsModule = () => {
         className="trendsSwiper select-none"
       >
         {products.map((prod) => {
+
+          const category = categories.find(cat => cat.id === prod.category);
+
           return (
             <SwiperSlide key={prod.id}>
-              <ProductCard product={prod} />
+              <ProductCard product={prod} category={category} />
               <div className="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
             </SwiperSlide>
           )

@@ -10,13 +10,16 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { SearchPanel } from "./SearchPanel";
 import { routesForAdmin } from "@/constants/route.constant";
+import { CartService } from "@/services/carts.service";
+import Link from "next/link";
 
 export const Navbar = () => {
 
-    const { isLogged, setIsLogged, user } = useStore(state => ({
+    const { isLogged, setIsLogged, user, setCart } = useStore(state => ({
         isLogged: state.isLogged,
         setIsLogged: state.setIsLogged,
-        user: state.user
+        user: state.user,
+        setCart: state.setCart,
     }), shallow)
 
     const pathname = usePathname()
@@ -28,6 +31,14 @@ export const Navbar = () => {
     useEffect(() => {
         setIsHydrated(true)
     }, [])
+
+    useEffect(() => {
+        if (!isLogged) return;
+
+        CartService.getCart()
+            .then(cart => setCart(cart))
+            .catch(() => setCart(null));
+    }, [isLogged]);
 
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -82,7 +93,9 @@ export const Navbar = () => {
 
                             {!routesForAdmin.includes(pathname) && (
                                 <div className="cursor-pointer">
-                                    <IoCartOutline size={20} />
+                                    <Link href="/cart">
+                                        <IoCartOutline size={20} />
+                                    </Link>
                                 </div>
                             )}
                         </div>

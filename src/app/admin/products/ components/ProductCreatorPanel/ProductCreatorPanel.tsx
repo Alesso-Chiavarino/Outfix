@@ -3,7 +3,7 @@
 import { FileUploader } from '@/components/FileUploader'
 import { useProducts } from '../../hooks/useProducts'
 import { ProductVariants } from './ProductVariants/ProductVariants'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { ImagesSlider } from '@/components/ImagesSlider'
 
 export const ProductCreatorPanel = ({ onSuccess, editingProduct }: any) => {
@@ -19,7 +19,8 @@ export const ProductCreatorPanel = ({ onSuccess, editingProduct }: any) => {
         // variants,
         // setVariant,
         addVariant, colorsDb, sizes, variant, setVariant, variants, removeVariant,
-        resetForm
+        resetForm,
+        deleteProduct
     } = useProducts(onSuccess, editingProduct)
 
     useEffect(() => {
@@ -34,14 +35,16 @@ export const ProductCreatorPanel = ({ onSuccess, editingProduct }: any) => {
                 Price: editingProduct.price,
                 Target: editingProduct.target,
                 Draft: editingProduct.draft
-            });
+            })
 
-            setVariant(editingProduct.variants || []);
+            setVariant(editingProduct.variants || [])
         } else {
-            resetForm();
+            resetForm()
+            setFileResetKey(k => k + 1) //
         }
-    }, [editingProduct]);
+    }, [editingProduct])
 
+    const [fileResetKey, setFileResetKey] = useState(0)
 
     const removeExistingImage = (url: string) => {
         setEditProduct({
@@ -172,7 +175,7 @@ export const ProductCreatorPanel = ({ onSuccess, editingProduct }: any) => {
                                     </div>
                                 </div>
                             )}
-                            <FileUploader />
+                            <FileUploader resetKey={fileResetKey} />
 
                             <div className="flex flex-col gap-1">
                                 <label className="text-sm font-medium">Descripción</label>
@@ -209,6 +212,22 @@ export const ProductCreatorPanel = ({ onSuccess, editingProduct }: any) => {
                     >
                         {editingProduct ? "Actualizar producto" : "Crear producto"}
                     </button>
+                    {editingProduct && (
+                        <div className="pt-6 border-t flex justify-center">
+                            <button
+                                type="button"
+                                onClick={deleteProduct}
+                                disabled={isLoading}
+                                className="
+                text-sm font-medium text-red-600
+                hover:text-red-800
+                transition
+            "
+                            >
+                                Eliminar producto
+                            </button>
+                        </div>
+                    )}
 
                 </form>
             </section>

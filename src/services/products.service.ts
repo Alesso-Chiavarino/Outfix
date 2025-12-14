@@ -41,13 +41,30 @@ export class ProductsService {
 
         return res.data.products
     }
-
-    static async getUserProducts(userEmail: string): Promise<Product[]> {
+    
+    static async getUserProducts(
+        userEmail: string,
+        page = 1,
+        limit = 20,
+        category?: string
+    ): Promise<{ products: Product[] }> {
 
         const outfixApi = new OutfixApi(false)
 
-        const res = await outfixApi.Get(`${API_URL}/api/products/user?owner=${userEmail}`)
-        return res.data.products
+        const params = new URLSearchParams()
+        params.append("owner", userEmail)
+        params.append("page", page.toString())
+        params.append("limit", limit.toString())
+
+        if (category) {
+            params.append("category", category)
+        }
+
+        const res = await outfixApi.Get(
+            `${API_URL}/api/products/user?${params.toString()}`
+        )
+
+        return res.data
     }
 
     static async getProductDetail(id: string): Promise<IProductDetail> {
@@ -83,5 +100,12 @@ export class ProductsService {
         )
 
         return res.data.products.filter((p: Product) => p.id !== excludeId)
+    }
+
+    static async deleteProduct(id: string) {
+        console.log("delete product", id)
+        const outfixApi = new OutfixApi(false)
+        const res = await outfixApi.Delete(`${API_URL}/api/products/${id}`)
+        return res.data
     }
 }
