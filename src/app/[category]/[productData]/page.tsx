@@ -42,7 +42,6 @@ export default async function Page({
     return (
         <main className="min-h-[94vh] container mx-auto p-10 flex flex-col gap-16">
 
-            {/* DETALLE */}
             <section className="flex gap-10">
                 <div className="w-1/2">
                     <ImagesSlider images={product.images} />
@@ -70,7 +69,7 @@ export default async function Page({
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                             {relatedProducts.map(p => (
-                                <ProductCard key={p.id} product={p} category={category}/>
+                                <ProductCard key={p.id} product={p} category={category} />
                             ))}
                         </div>
                     </section>

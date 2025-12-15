@@ -6,32 +6,39 @@ export class OutfixApi {
     private _isServerSide: boolean;
 
     constructor(_isServerSide: boolean) {
-
         this._isServerSide = _isServerSide;
-
         this.axiosInstance = axios.create();
 
         this.axiosInstance.interceptors.request.use(
             config => {
-
-                let token: any;
+                let token: string | undefined;
 
                 if (this._isServerSide) {
-                    const { cookies } = require('next/headers');
-                    token = cookies().get('_auth').value;
+                    try {
+                        const { cookies } = require('next/headers');
+                        const cookieStore = cookies();
+                        const authCookie = cookieStore.get('_auth');
+                        token = authCookie?.value; // ✅ SAFE
+                    } catch {
+                        token = undefined;
+                    }
                 } else {
-                    const Cookies = require("js-cookie");
-                    token = Cookies.get('_auth');
+                    try {
+                        const Cookies = require("js-cookie");
+                        token = Cookies.get('_auth');
+                    } catch {
+                        token = undefined;
+                    }
                 }
+
                 if (token) {
                     config.headers['Authorization'] = `Bearer ${token}`;
                 }
+
                 return config;
             },
-            error => {
-                return Promise.reject(error);
-            }
-        )
+            error => Promise.reject(error)
+        );
     }
 
     public Get(url: string) {
