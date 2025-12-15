@@ -15,33 +15,47 @@ export function ImagesSlider({ images }: { images: string[] }) {
 
     return (
         <div className='w-full flex gap-2 select-none h-[450px]'>
-            <div className='w-[10%]'>
+            <div className="w-[10%] h-full">
                 <Swiper
+                    direction="vertical"
                     onSwiper={setThumbsSwiper}
-                    loop={true}
-                    slidesPerView={Infinity}
+                    spaceBetween={10}
+                    slidesPerView="auto"
+                    freeMode
+                    watchSlidesProgress
                     modules={[FreeMode, Navigation, Thumbs]}
-                    className="mySwiperChildrenDetail"
+                    className="h-full"
                 >
-                    {images && images.length > 0 && images.map((image, index) => (
-                        <SwiperSlide key={index} className='cursor-pointer w-[50px] h-[50px] border-[1px] border-gray-400 rounded-md overflow-hidden p-[2px] hover:border-gray-600'>
-                            <img className='object-cover w-full h-full' src={image} />
+                    {images.map((image, index) => (
+                        <SwiperSlide
+                            key={index}
+                            className="!h-[60px] cursor-pointer border border-gray-400 rounded-md overflow-hidden"
+                        >
+                            <img
+                                src={image}
+                                className="w-full h-full object-cover"
+                                alt=""
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>
             </div>
-            <div className="w-[90%]">
+            <div className="w-[90%] h-full">
                 <Swiper
-                    loop={true}
+                    loop
                     spaceBetween={10}
-                    navigation={true}
+                    navigation
                     thumbs={{ swiper: thumbsSwiper }}
                     modules={[FreeMode, Navigation, Thumbs]}
-                    className='mySwiperDetail'
+                    className="mySwiperDetail h-full"
                 >
-                    {images && images.length > 0 && images.map((image, index) => (
-                        <SwiperSlide key={index}>
-                            <img className='object-contain w-full h-full' src={image} />
+                    {images.map((image, index) => (
+                        <SwiperSlide key={index} className="h-full flex items-center justify-center">
+                            <img
+                                src={image}
+                                className="max-h-full max-w-full object-contain"
+                                alt=""
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>
