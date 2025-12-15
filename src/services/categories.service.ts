@@ -4,6 +4,7 @@ import { ICategory } from "@/models/ICategory"
 
 export class CategoriesService {
     static async getCategories(): Promise<ICategory[]> {
+        console.log("api url", API_URL)
         const outfixApi = new OutfixApi(false)
         const res = await outfixApi.Get(`${API_URL}/api/categories`)
         const data = res.data

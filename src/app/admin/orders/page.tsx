@@ -19,7 +19,7 @@ export default function OrdersPage() {
 
     if (loading) {
         return (
-            <main className="min-h-[93vh] flex items-center justify-center">
+            <main className="min-h-[93vh] flex items-center justify-center w-full">
                 <div className="animate-spin rounded-full h-8 w-8 border-2 border-black border-t-transparent" />
             </main>
         )

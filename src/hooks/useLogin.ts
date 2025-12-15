@@ -41,6 +41,7 @@ export const useLogin = () => {
         setIsLoading(true)
 
         try {
+            console.log("ACA", API_URL)
             const token = await axios.post(`${API_URL}/api/authentication/login`, userLogin)
 
             if (token.data) {
