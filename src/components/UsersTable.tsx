@@ -14,7 +14,7 @@ const UsersTable = async () => {
           space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900">
 
                 <div>
-                    <button
+                    {/* <button
                         id="dropdownActionButton"
                         data-dropdown-toggle="dropdownAction"
                         type="button"
@@ -26,7 +26,7 @@ const UsersTable = async () => {
                         <svg className="w-2.5 h-2.5 ms-2.5" fill="none" viewBox="0 0 10 6">
                             <path stroke="currentColor" strokeWidth="2" d="m1 1 4 4 4-4" />
                         </svg>
-                    </button>
+                    </button> */}
 
                     <div
                         id="dropdownAction"
@@ -43,7 +43,7 @@ const UsersTable = async () => {
                     </div>
                 </div>
 
-                <div className="relative">
+                {/* <div className="relative">
                     <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeWidth="2"
@@ -57,7 +57,7 @@ const UsersTable = async () => {
               dark:text-white"
                         placeholder="Search for users"
                     />
-                </div>
+                </div> */}
             </div>
 
             <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

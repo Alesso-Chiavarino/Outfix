@@ -7,6 +7,7 @@ export interface UserRegister {
     Email: string;
     Password: string;
     Name: string;
+    Role?: keyof typeof UserRole;
 }
 
 export enum UserRole {

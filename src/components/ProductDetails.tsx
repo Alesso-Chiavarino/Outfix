@@ -81,10 +81,10 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
                     </p>
                 </div>
 
-                <IoIosHeartEmpty
+                {/* <IoIosHeartEmpty
                     size={26}
                     className="cursor-pointer text-gray-600 hover:text-black transition"
-                />
+                /> */}
             </div>
 
             {/* PRECIO */}

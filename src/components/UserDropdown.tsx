@@ -66,15 +66,18 @@ export const UserDropdown = ({ setIsLogged, user }: UserDropdownProps) => {
                             <ul className="py-2" aria-labelledby="user-menu-button">
                                 {user.role === UserRole.admin ? (
                                     <li>
-                                        <Link href="/admin/dashboard" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Admin Manager</Link>
+                                        <Link href="/admin/users" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Panel de Administrador</Link>
                                     </li>
                                 ) : (
+                                    // <li>
+                                    //     <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mis compras</a>
+                                    // </li>
                                     <li>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mis compras</a>
+                                        <Link href="/admin/products" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Mi Cuenta</Link>
                                     </li>
                                 )}
                                 <li>
-                                    <Link href="/config" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Configuración</Link>
+                                    {/* <Link href="/config" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Configuración</Link> */}
                                 </li>
                                 <li>
                                     <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" onClick={handleSignOut}>Cerrar sesión</button>

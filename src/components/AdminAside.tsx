@@ -4,8 +4,9 @@ import Link from 'next/link'
 import React from 'react'
 import { BsArchiveFill, BsCollectionFill } from 'react-icons/bs'
 import { FaUser } from 'react-icons/fa'
-import { MdDashboard } from 'react-icons/md'
+// import { MdDashboard } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
+import { useStore } from '@/store/store'
 
 type SidebarItemProps = {
     href: string
@@ -48,6 +49,9 @@ const SidebarItem = ({ href, icon, label, active }: SidebarItemProps) => {
 
 export const AdminAside = () => {
     const pathname = usePathname()
+    const { user } = useStore();
+
+    const isUserAdmin = user?.role === 'admin';
 
     return (
         <aside
@@ -73,19 +77,19 @@ export const AdminAside = () => {
             <nav className="flex-1 py-6">
                 <ul className="flex flex-col gap-2 px-2">
 
-                    <SidebarItem
+                    {/* <SidebarItem
                         href="/admin/dashboard"
                         icon={<MdDashboard />}
                         label="Dashboard"
                         active={pathname.includes('/dashboard')}
-                    />
+                    /> */}
 
-                    <SidebarItem
+                    {isUserAdmin && <SidebarItem
                         href="/admin/users"
                         icon={<FaUser />}
                         label="Usuarios"
                         active={pathname.includes('/users')}
-                    />
+                    />}
 
                     <SidebarItem
                         href="/admin/products"

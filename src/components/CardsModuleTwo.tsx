@@ -28,10 +28,12 @@ export const CardsModuleTwo = () => {
                                 </h2>
 
                                 <p className="text-gray-200 text-sm md:text-base max-w-md drop-shadow-md">
-                                    Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y minimalista.
+                                    Diseños pensados para acompañarte todos los días.
+                                    Prendas cómodas, actuales y versátiles que se adaptan a tu ritmo,
+                                    sin perder estilo.
                                 </p>
 
-                                <CollectionLink link="/women" />
+                                {/* <CollectionLink link="/women" /> */}
                             </div>
                         </article>
                     </li>
@@ -53,10 +55,12 @@ export const CardsModuleTwo = () => {
                                 </h2>
 
                                 <p className="text-gray-200 text-sm md:text-base max-w-md drop-shadow-md">
-                                    Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y minimalista.
+                                    Estilo urbano, funcional y atemporal.
+                                    Ropa diseñada para el día a día, con materiales de calidad
+                                    y un look que nunca pasa de moda.
                                 </p>
 
-                                <CollectionLink link="/men" />
+                                {/* <CollectionLink link="/men" /> */}
                             </div>
                         </article>
                     </li>
@@ -79,10 +83,12 @@ export const CardsModuleTwo = () => {
                             </h2>
 
                             <p className="text-gray-200 text-sm md:text-base max-w-md drop-shadow-md">
-                                Calvin Klein es una marca de moda y estilo de vida global que ejemplifica audacia progresiva y una estética seductora y minimalista.
+                                Comodidad, resistencia y libertad de movimiento.
+                                Prendas pensadas para acompañar cada aventura,
+                                todos los días.
                             </p>
 
-                            <CollectionLink link="/kids" />
+                            {/* <CollectionLink link="/kids" /> */}
                         </div>
                     </article>
                 </li>

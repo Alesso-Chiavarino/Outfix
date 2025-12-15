@@ -4,7 +4,7 @@ import React from 'react'
 export const TopicsContainer = () => {
     return (
         <ul className='flex items-center gap-10 font-medium'>
-            <li>
+            {/* <li>
                 <Link href={`/men`}>Hombre</Link>
             </li>
             <li>
@@ -12,7 +12,7 @@ export const TopicsContainer = () => {
             </li>
             <li>
                 <Link href={`/kids`}>Niños</Link>
-            </li>
+            </li> */}
         </ul>
     )
 }

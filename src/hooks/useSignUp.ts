@@ -24,7 +24,8 @@ export const useSignUp = () => {
     const [user, setUser] = useState<UserRegister>({
         Email: '',
         Password: '',
-        Name: ''
+        Name: '',
+        Role: 'customer'
     })
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
