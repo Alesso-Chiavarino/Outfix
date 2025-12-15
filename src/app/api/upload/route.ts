@@ -11,7 +11,6 @@ export async function POST(request: Request) {
         const rawFormData = Object.fromEntries(data);
         const variantsJson = rawFormData.Variants ? JSON.parse(rawFormData.Variants.toString()) : []
 
-        console.log("rawFormData", rawFormData)
         const productFiles: File[] = [];
         Object.keys(rawFormData).forEach(key => {
             const value = rawFormData[key];
@@ -59,7 +58,6 @@ export async function POST(request: Request) {
             draft: rawFormData.Draft === 'true' ? true : false
         };
 
-        console.log("product", product)
 
         await ProductsService.createProduct(product);
 

@@ -106,7 +106,6 @@ export const useProducts = (onSuccess?: () => void, editingProduct?: Product) =>
                 action: {
                     label: "Eliminar",
                     onClick: async () => {
-                        console.log("ACAAA")
                         toast.loading("Eliminando producto...", { id: "delete-product-toast" });
                         setIsLoading(true);
 
@@ -165,7 +164,6 @@ export const useProducts = (onSuccess?: () => void, editingProduct?: Product) =>
                 formData.append('ProductId', editingProduct!.id)
             }
 
-            console.log("isUpdating", isUpdating)
 
             if (isUpdating) {
 

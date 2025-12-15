@@ -72,7 +72,6 @@ export async function PUT(
             images: finalImages
         }
 
-        console.log("product", product)
         await ProductsService.updateProduct(params.id, product as CreateProductRequest)
 
         return NextResponse.json(

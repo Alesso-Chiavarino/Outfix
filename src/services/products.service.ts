@@ -103,7 +103,6 @@ export class ProductsService {
     }
 
     static async deleteProduct(id: string) {
-        console.log("delete product", id)
         const outfixApi = new OutfixApi(false)
         const res = await outfixApi.Delete(`${API_URL}/api/products/${id}`)
         return res.data

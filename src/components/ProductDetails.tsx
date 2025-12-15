@@ -49,18 +49,19 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
         try {
             setIsAdding(true)
 
-            await CartService.addItem({
+            const res = await CartService.addItem({
                 productId: product.id,
                 variantId,
                 quantity,
             })
 
+
             const cart = await CartService.getCart()
 
             setCart(cart)
             toast.success('Producto agregado al carrito')
-        } catch (err) {
-            toast.error('Error al agregar al carrito')
+        } catch (err: any) {
+            toast.error(err.response?.data || 'Error al agregar al carrito')
         } finally {
             setIsAdding(false)
         }

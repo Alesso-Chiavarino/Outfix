@@ -99,7 +99,10 @@ export default function CartPage() {
 
             const cart = await CartService.getCart()
             setCart(cart)
-        } finally {
+        } catch (err: any) {
+            toast.error(err.response.data || 'Error al actualizar la cantidad')
+        }
+        finally {
             setUpdating(null)
         }
     }

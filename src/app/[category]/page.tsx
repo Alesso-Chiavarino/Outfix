@@ -9,11 +9,8 @@ export default async function CategoryPage({
     params: { category: string }
 }) {
     const slug = decodeURIComponent(params.category)
-    console.log("SLUG", slug)
     const categories = await CategoriesService.getCategories()
     const category = categories.find(c => c.slug.toLowerCase() === slug.toLowerCase())
-    console.log("category", category)
-    console.log("categories", categories)
 
     if (!category) {
         notFound()

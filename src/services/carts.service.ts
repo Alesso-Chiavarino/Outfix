@@ -8,13 +8,11 @@ export class CartService {
     static async getCart(): Promise<ICartView> {
         const api = new OutfixApi(false);
         const res = await api.Get(`${API_URL}/api/cart`);
-        console.log("ACA DIOS", res)
         return res.data;
     }
 
     // 🔹 Agregar item al carrito
     static async addItem(item: ICartItem): Promise<ICart> {
-        console.log("EL ITEM", item)
         const api = new OutfixApi(false);
         const res = await api.Post(`${API_URL}/api/cart/items`, item);
         return res.data;

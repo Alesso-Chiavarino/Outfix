@@ -1,14 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { CartService } from '@/services/carts.service'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { CheckoutsService } from '@/services/checkouts.service'
 
 export default function CheckoutPage() {
+    const startedRef = useRef(false)
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        if (startedRef.current) return
+        startedRef.current = true
+
         const startCheckout = async () => {
             try {
                 toast.loading('Redirigiendo a Mercado Pago...', {
@@ -24,9 +27,6 @@ export default function CheckoutPage() {
                 console.error(err)
                 setLoading(false)
             }
-            finally {
-                setLoading(false)
-            }
         }
 
         startCheckout()
@@ -36,9 +36,11 @@ export default function CheckoutPage() {
         <main className="min-h-[93vh] flex items-center justify-center">
             <div className="flex flex-col items-center gap-4">
                 <div className="animate-spin rounded-full h-10 w-10 border-2 border-black border-t-transparent" />
-                {loading && <p className="text-gray-600 text-sm">
-                    Preparando tu pago…
-                </p>}
+                {loading && (
+                    <p className="text-gray-600 text-sm">
+                        Preparando tu pago…
+                    </p>
+                )}
             </div>
         </main>
     )

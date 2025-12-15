@@ -7,7 +7,6 @@ export class CategoriesService {
         const outfixApi = new OutfixApi(false)
         const res = await outfixApi.Get(`${API_URL}/api/categories`)
         const data = res.data
-        console.log("ACA PLS", data)
         return data
     }
 
