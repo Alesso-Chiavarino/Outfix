@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Product } from '@/models/IProduct'
 import { ICategory } from '@/models/ICategory'
+import { IColor } from '@/models/IColor'
 
 export const useProducts = (onSuccess?: () => void, editingProduct?: Product) => {
 
@@ -29,7 +30,7 @@ export const useProducts = (onSuccess?: () => void, editingProduct?: Product) =>
     }))
 
     const [categories, setCategories] = useState<ICategory[]>([])
-    const [colorsDb, setColorsDb] = useState([])
+    const [colorsDb, setColorsDb] = useState<IColor[]>([])
 
     const sizes = ["XS", "S", "M", "L", "XL", "XXL"]
 
