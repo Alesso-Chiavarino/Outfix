@@ -2,9 +2,8 @@
 
 import Link from 'next/link'
 import React from 'react'
-import { BsArchiveFill, BsCollectionFill } from 'react-icons/bs'
-import { FaUser } from 'react-icons/fa'
-// import { MdDashboard } from 'react-icons/md'
+import { BsArchiveFill, BsCollectionFill, BsTagsFill } from 'react-icons/bs'
+import { FaUser, FaPalette } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
 import { useStore } from '@/store/store'
 
@@ -33,13 +32,14 @@ const SidebarItem = ({ href, icon, label, active }: SidebarItemProps) => {
                     {icon}
                 </span>
 
-                {/* Texto oculto hasta hover */}
-                <span className="
-                    whitespace-nowrap
-                    opacity-0
-                    group-hover:opacity-100
-                    transition-opacity duration-200
-                ">
+                <span
+                    className="
+                        whitespace-nowrap
+                        opacity-0
+                        group-hover:opacity-100
+                        transition-opacity duration-200
+                    "
+                >
                     {label}
                 </span>
             </Link>
@@ -49,9 +49,9 @@ const SidebarItem = ({ href, icon, label, active }: SidebarItemProps) => {
 
 export const AdminAside = () => {
     const pathname = usePathname()
-    const { user } = useStore();
+    const { user } = useStore()
 
-    const isUserAdmin = user?.role === 'admin';
+    const isUserAdmin = user?.role === 'admin'
 
     return (
         <aside
@@ -77,32 +77,50 @@ export const AdminAside = () => {
             <nav className="flex-1 py-6">
                 <ul className="flex flex-col gap-2 px-2">
 
-                    {/* <SidebarItem
-                        href="/admin/dashboard"
-                        icon={<MdDashboard />}
-                        label="Dashboard"
-                        active={pathname.includes('/dashboard')}
-                    /> */}
+                    {/* 👤 USUARIOS (solo admin) */}
+                    {isUserAdmin && (
+                        <SidebarItem
+                            href="/admin/users"
+                            icon={<FaUser />}
+                            label="Usuarios"
+                            active={pathname.includes('/admin/users')}
+                        />
+                    )}
 
-                    {isUserAdmin && <SidebarItem
-                        href="/admin/users"
-                        icon={<FaUser />}
-                        label="Usuarios"
-                        active={pathname.includes('/users')}
-                    />}
-
+                    {/* 🛍 PRODUCTOS */}
                     <SidebarItem
                         href="/admin/products"
                         icon={<BsCollectionFill />}
                         label="Productos"
-                        active={pathname.includes('/products')}
+                        active={pathname.includes('/admin/products')}
                     />
 
+                    {/* 📂 CATEGORÍAS (solo admin) */}
+                    {isUserAdmin && (
+                        <SidebarItem
+                            href="/admin/categories"
+                            icon={<BsTagsFill />}
+                            label="Categorías"
+                            active={pathname.includes('/admin/categories')}
+                        />
+                    )}
+
+                    {/* 🎨 COLORES (solo admin) */}
+                    {isUserAdmin && (
+                        <SidebarItem
+                            href="/admin/colors"
+                            icon={<FaPalette />}
+                            label="Colores"
+                            active={pathname.includes('/admin/colors')}
+                        />
+                    )}
+
+                    {/* 📦 ÓRDENES */}
                     <SidebarItem
                         href="/admin/orders"
                         icon={<BsArchiveFill />}
                         label="Órdenes"
-                        active={pathname.includes('/orders')}
+                        active={pathname.includes('/admin/orders')}
                     />
                 </ul>
             </nav>
