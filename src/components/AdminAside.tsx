@@ -69,7 +69,7 @@ export const AdminAside = () => {
             {/* HEADER */}
             <div className="h-16 flex items-center justify-center border-b border-zinc-800">
                 <span className="text-white font-semibold text-lg opacity-0 group-hover:opacity-100 transition">
-                    Admin
+                    {user?.role === 'admin' ? 'Admin' : 'Vendedor'}
                 </span>
             </div>
 

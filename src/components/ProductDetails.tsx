@@ -50,6 +50,7 @@ export const ProductDetails = ({ product }: { product: IProductDetail }) => {
             setIsAdding(true)
 
             const res = await CartService.addItem({
+                productOwnerId: product.owner,
                 productId: product.id,
                 variantId,
                 quantity,

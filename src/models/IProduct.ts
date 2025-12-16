@@ -52,6 +52,7 @@ export interface Product {
 
 export interface IProductDetail {
     id: string;
+    owner: string;
     title: string;
     description: string;
     price: number;

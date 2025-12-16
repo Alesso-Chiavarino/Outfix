@@ -10,7 +10,7 @@ export default function OrdersPage() {
 
     useEffect(() => {
         const load = async () => {
-            const res = await OrdersService.getMyOrders()
+            const res = await OrdersService.getMySales()
             setOrders(res)
             setLoading(false)
         }
@@ -29,11 +29,8 @@ export default function OrdersPage() {
         return (
             <main className="min-h-[93vh] flex items-center justify-center flex-col gap-4 w-full">
                 <h1 className="text-2xl font-semibold">
-                    No tenés compras todavía
+                    No tenés ventas todavía
                 </h1>
-                <Link href="/" className="underline text-gray-600">
-                    Ir a la tienda
-                </Link>
             </main>
         )
     }
@@ -41,7 +38,7 @@ export default function OrdersPage() {
     return (
         <main className="container mx-auto py-14 max-w-4xl min-h-[93vh]">
             <h1 className="text-3xl font-semibold mb-10">
-                Mis pedidos
+                Mis ventas
             </h1>
 
             <div className="flex flex-col gap-8">
@@ -51,19 +48,28 @@ export default function OrdersPage() {
                         className="border rounded-2xl p-6 shadow-sm flex flex-col gap-5"
                     >
                         {/* HEADER */}
-                        <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-500">
-                                Pedido #{order.id.slice(-6)}
-                            </span>
+                        <div className="flex justify-between items-start gap-4">
+                            <div className="flex flex-col">
+                                <span className="text-sm text-gray-500">
+                                    Pedido #{order.id.slice(-6)}
+                                </span>
+
+                                <span className="text-sm text-gray-600">
+                                    Comprador:{' '}
+                                    <span className="font-medium text-gray-800">
+                                        {order.username}
+                                    </span>
+                                </span>
+                            </div>
 
                             <span
                                 className={`text-sm font-medium capitalize
-                                    ${order.status === 'approved'
+            ${order.status === 'approved'
                                         ? 'text-green-600'
                                         : order.status === 'pending'
                                             ? 'text-yellow-600'
                                             : 'text-red-600'}
-                                `}
+        `}
                             >
                                 {order.status}
                             </span>

@@ -1,5 +1,6 @@
 export interface ICartItem {
     productId: string;
+    productOwnerId: string;
     variantId: string;
     quantity: number;
 }

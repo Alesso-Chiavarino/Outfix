@@ -73,11 +73,11 @@ export const UserDropdown = ({ setIsLogged, user }: UserDropdownProps) => {
                                     //     <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Mis compras</a>
                                     // </li>
                                     <li>
-                                        <Link href="/admin/products" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Mi Cuenta</Link>
+                                        <Link href="/admin/products" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Panel de Vendedor</Link>
                                     </li>
                                 )}
                                 <li>
-                                    {/* <Link href="/config" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Configuración</Link> */}
+                                    <Link href="/orders" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" onClick={() => setIsToggle(true)}>Mis Pedidos</Link>
                                 </li>
                                 <li>
                                     <button className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left" onClick={handleSignOut}>Cerrar sesión</button>

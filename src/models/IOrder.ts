@@ -9,17 +9,18 @@ export interface IOrder {
     id: string
 
     userId: string
+    username: string
 
     items: IOrderItem[]
 
     total: number
 
-    status: 
-        | 'pending'
-        | 'approved'
-        | 'rejected'
-        | 'cancelled'
-        | 'in_process'
+    status:
+    | 'pending'
+    | 'approved'
+    | 'rejected'
+    | 'cancelled'
+    | 'in_process'
 
     preferenceId?: string | null
     paymentId?: string | null
